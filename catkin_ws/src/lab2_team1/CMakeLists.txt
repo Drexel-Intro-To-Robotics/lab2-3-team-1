@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(lab2)
+project(lab2_team1)
 
 find_package(catkin REQUIRED COMPONENTS
   rospy
@@ -13,6 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package()
 
 catkin_install_python(PROGRAMS
-  scripts/robot_control.py
+  scripts/astar_node.py
+  scripts/turtlebot_control.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
