@@ -1,11 +1,37 @@
 <launch>
-  <!-- Robot description -->
-  <include file="$(find turtlebot3_manipulation_bringup)/launch/turtlebot3_manipulation_bringup.launch"/>
+
+  <!-- Robot description / URDF -->
+  <include file="$(find turtlebot3_manipulation_bringup)/launch/
+      turtlebot3_manipulation_bringup.launch"/>
+
+  <!-- Joint State Publisher -->
+  <node name="joint_state_publisher"
+        pkg="joint_state_publisher"
+        type="joint_state_publisher">
+    <param name="rate" value="50"/>
+  </node>
+
+  <!-- Robot State Publisher -->
+  <node name="robot_state_publisher"
+        pkg="robot_state_publisher"
+        type="robot_state_publisher"/>
+
+  <!-- ros_control controllers -->
+  <rosparam file="$(find turtlebot3_manipulation_moveit_config)/
+      config/ros_controllers.yaml"
+      command="load"/>
 
   <!-- MoveIt move_group -->
-  <include file="$(find turtlebot3_manipulation_moveit_config)/launch/move_group.launch"/>
+  <include file="$(find turtlebot3_manipulation_moveit_config)/
+      launch/move_group.launch">
+    <arg name="allow_trajectory_execution" value="true"/>
+    <arg name="fake_execution"             value="false"/>
+    <arg name="trajectory_execution/execution_duration_monitoring"
+         value="false"/>
+  </include>
 
-  <!-- RViz with MoveIt -->
-  <include file="$(find turtlebot3_manipulation_moveit_config)/launch/moveit_rviz.launch"/>
+  <!-- RViz with MoveIt configuration -->
+  <include file="$(find turtlebot3_manipulation_moveit_config)/
+      launch/moveit_rviz.launch"/>
 
 </launch>
