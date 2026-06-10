@@ -1,0 +1,11 @@
+<launch>
+  <!-- Robot description -->
+  <include file="$(find turtlebot3_manipulation_bringup)/launch/turtlebot3_manipulation_bringup.launch"/>
+
+  <!-- MoveIt move_group -->
+  <include file="$(find turtlebot3_manipulation_moveit_config)/launch/move_group.launch"/>
+
+  <!-- RViz with MoveIt -->
+  <include file="$(find turtlebot3_manipulation_moveit_config)/launch/moveit_rviz.launch"/>
+
+</launch>
